@@ -787,45 +787,155 @@ function type(){
 }
 setTimeout(type,2700);
 
-/* ─── PHOTO LOOP WITH SHARINGAN ─── */
+/* ─── PHOTO LOOP WITH SHARINGAN (FIXED MULTI‑LINE) ─── */
 (function(){
   const statusText=document.getElementById('photoStatusText');
   const statusCursor=document.getElementById('photoCursor');
   const sharingan=document.getElementById('sharinganSpinner');
   const revealLine=document.getElementById('photoRevealLine');
   const revealText=document.getElementById('photoRevealText');
-  const loadPhrase='Photo Loading...';
-  const revealPhrase="It won't.";
+  const loadPhrase="Attempting to \n load image...";
+  const revealPhrase="Would have helped if,\n I had uploaded one.";
   let idx=0;
   function typeLoad(){
     if(idx===0){statusCursor.style.display='inline-block';sharingan.style.display='inline-flex';}
-    if(idx<=loadPhrase.length){statusText.textContent=loadPhrase.substring(0,idx++);setTimeout(typeLoad,90);}
-    else{setTimeout(()=>{statusText.textContent='';statusCursor.style.display='none';sharingan.style.display='none';setTimeout(()=>{idx=0;revealLine.style.display='flex';typeReveal();},600);},3000);}
+    if(idx<=loadPhrase.length){
+      statusText.innerHTML = loadPhrase.substring(0, idx++).replace(/\n/g, '<br>');
+      setTimeout(typeLoad,90);
+    } else {
+      setTimeout(()=>{
+        statusText.innerHTML='';
+        statusCursor.style.display='none';
+        sharingan.style.display='none';
+        setTimeout(()=>{idx=0;revealLine.style.display='flex';typeReveal();},600);
+      },3000);
+    }
   }
   function typeReveal(){
-    if(idx<=revealPhrase.length){revealText.textContent=revealPhrase.substring(0,idx++);setTimeout(typeReveal,80);}
-    else{revealLine.classList.add('visible');setTimeout(()=>{revealLine.classList.remove('visible');revealText.textContent='';revealLine.style.display='none';setTimeout(()=>{idx=0;typeLoad();},600);},3000);}
+    if(idx<=revealPhrase.length){
+      revealText.innerHTML = revealPhrase.substring(0, idx++).replace(/\n/g, '<br>');
+      setTimeout(typeReveal,80);
+    } else {
+      revealLine.classList.add('visible');
+      setTimeout(()=>{
+        revealLine.classList.remove('visible');
+        revealText.innerHTML='';
+        revealLine.style.display='none';
+        setTimeout(()=>{idx=0;typeLoad();},600);
+      },3000);
+    }
   }
   typeLoad();
 })();
 
-/* ─── RADAR CHART ─── */
-function drawRadar(canvasId,labels,values){
-  const c=document.getElementById(canvasId);if(!c)return;
-  const ctx=c.getContext('2d');
-  const W=c.width,H=c.height,cx=W/2,cy=H/2+10;
-  const r=Math.min(W,H)*0.38;const n=labels.length;
-  ctx.clearRect(0,0,W,H);
-  const angles=labels.map((_,i)=>-Math.PI/2+(2*Math.PI/n)*i);
-  [0.2,0.4,0.6,0.8,1].forEach(frac=>{ctx.beginPath();angles.forEach((a,i)=>{const x=cx+Math.cos(a)*r*frac,y=cy+Math.sin(a)*r*frac;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.closePath();ctx.strokeStyle='rgba(22,32,53,0.8)';ctx.lineWidth=1;ctx.stroke();});
-  angles.forEach(a=>{ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);ctx.strokeStyle='rgba(22,32,53,0.6)';ctx.lineWidth=1;ctx.stroke();});
-  ctx.beginPath();angles.forEach((a,i)=>{const v=values[i]/100;const x=cx+Math.cos(a)*r*v,y=cy+Math.sin(a)*r*v;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.closePath();ctx.fillStyle='rgba(124,58,237,0.15)';ctx.fill();ctx.strokeStyle='rgba(159,103,255,0.7)';ctx.lineWidth=1.5;ctx.stroke();
-  angles.forEach((a,i)=>{const v=values[i]/100;const x=cx+Math.cos(a)*r*v,y=cy+Math.sin(a)*r*v;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='#9F67FF';ctx.fill();});
-  ctx.font='10px Space Mono,monospace';ctx.fillStyle='rgba(148,163,184,0.9)';ctx.textAlign='center';
-  angles.forEach((a,i)=>{const lx=cx+Math.cos(a)*(r+18),ly=cy+Math.sin(a)*(r+18)+4;ctx.fillText(labels[i],lx,ly);});
+/* ─── RADAR CHART (HIGH‑DPI) ─── */
+function drawRadar(canvas, labels, values) {
+  const rect = canvas.getBoundingClientRect();
+  const logicalW = rect.width;
+  const logicalH = rect.height;
+  if (logicalW === 0 || logicalH === 0) return;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = logicalW * dpr;
+  canvas.height = logicalH * dpr;
+  canvas.style.width = logicalW + 'px';
+  canvas.style.height = logicalH + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  const W = logicalW, H = logicalH;
+  const cx = W / 2, cy = H / 2 + (H < 250 ? 5 : 10);
+  const r = Math.min(W, H) * 0.38;
+  const n = labels.length;
+  ctx.clearRect(0, 0, W, H);
+  const angles = labels.map((_, i) => -Math.PI / 2 + (2 * Math.PI / n) * i);
+  // background rings
+  [0.2, 0.4, 0.6, 0.8, 1].forEach(frac => {
+    ctx.beginPath();
+    angles.forEach((a, i) => {
+      const x = cx + Math.cos(a) * r * frac;
+      const y = cy + Math.sin(a) * r * frac;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(22,32,53,0.8)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+  // spokes
+  angles.forEach(a => {
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+    ctx.strokeStyle = 'rgba(22,32,53,0.6)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+  // data fill
+  ctx.beginPath();
+  angles.forEach((a, i) => {
+    const v = values[i] / 100;
+    const x = cx + Math.cos(a) * r * v;
+    const y = cy + Math.sin(a) * r * v;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(124,58,237,0.15)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(159,103,255,0.7)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  // data points
+  angles.forEach((a, i) => {
+    const v = values[i] / 100;
+    const x = cx + Math.cos(a) * r * v;
+    const y = cy + Math.sin(a) * r * v;
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#9F67FF';
+    ctx.fill();
+  });
+  // labels
+  const fontSize = Math.max(10, Math.round(r * 0.1));
+  ctx.font = fontSize + 'px Space Mono, monospace';
+  ctx.fillStyle = 'rgba(148,163,184,0.9)';
+  ctx.textAlign = 'center';
+  angles.forEach((a, i) => {
+    const offset = r + Math.round(r * 0.15);
+    const lx = cx + Math.cos(a) * offset;
+    const ly = cy + Math.sin(a) * offset + 4;
+    ctx.fillText(labels[i], lx, ly);
+  });
 }
-setTimeout(()=>drawRadar('radar-canvas',['PENTEST','SOC','API SEC','OSINT','PYTHON','MALWARE'],[78,72,82,65,85,70]),500);
-setTimeout(()=>drawRadar('skill-radar',['PENTEST','DEFENSIVE','API SEC','OSINT','CODING','ANALYSIS','REPORTING'],[78,72,82,65,85,70,75]),600);
+
+function redrawAllRadars() {
+  const radar1 = document.getElementById('radar-canvas');
+  if (radar1) {
+    radar1.style.width = '';
+    radar1.style.height = '';
+    radar1.getBoundingClientRect(); // force reflow
+    drawRadar(radar1,
+      ['PENTEST','SOC','API SEC','OSINT','PYTHON','MALWARE'],
+      [78,72,82,65,85,70]);
+  }
+  const radar2 = document.getElementById('skill-radar');
+  if (radar2) {
+    radar2.style.width = '';
+    radar2.style.height = '';
+    radar2.getBoundingClientRect();
+    drawRadar(radar2,
+      ['PENTEST','DEFENSIVE','API SEC','OSINT','CODING','ANALYSIS','REPORTING'],
+      [78,72,82,65,85,70,75]);
+  }
+}
+
+// initial draw after layout
+setTimeout(redrawAllRadars, 200);
+
+// redraw on resize (debounced)
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(redrawAllRadars, 150);
+});
 
 /* ─── INTERACTIVE TERMINAL ─── */
 (function(){
