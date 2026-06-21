@@ -436,9 +436,9 @@ footer{border-top:1px solid var(--border);padding:22px 80px;display:flex;align-i
         <canvas id="radar-canvas" width="280" height="220"></canvas>
       </div>
       <div class="stats">
-        <div class="stat reveal d3"><div class="stat-n">3</div><div class="stat-l">INTERNSHIPS</div></div>
+        <div class="stat reveal d3"><div class="stat-n">2</div><div class="stat-l">INTERNSHIPS</div></div>
         <div class="stat reveal d4"><div class="stat-n">6</div><div class="stat-l">SIMULATIONS</div></div>
-        <div class="stat reveal d3"><div class="stat-n">4</div><div class="stat-l">TOOLS BUILT</div></div>
+        <div class="stat reveal d3"><div class="stat-n">6</div><div class="stat-l">TOOLS BUILT</div></div>
         <div class="stat reveal d4"><div class="stat-n">100%</div><div class="stat-l">DETECTION RATE</div></div>
       </div>
     </div>
@@ -492,6 +492,22 @@ footer{border-top:1px solid var(--border);padding:22px 80px;display:flex;align-i
       <div class="tags"><span class="tag tp">Python</span><span class="tag tc">Scapy</span><span class="tag tg">Network Forensics</span><span class="tag tp">ARP / MitM</span></div>
       <a href="https://github.com/jay-sharma-sec/arp-spoofer-and-packet-sniffer" target="_blank" rel="noopener noreferrer" class="proj-link">View on GitHub →</a>
     </article>
+    <article class="proj-card reveal d5">
+      <div class="proj-num">PROJECT_05 <div class="proj-num-badge">🔒</div></div>
+      <div class="proj-name">File Integrity Monitor</div>
+      <div class="proj-metrics"><p><span>✓</span> SHA-256 baseline across full directory trees<br/><span>✓</span> Real-time detection via OS filesystem events<br/><span>✓</span> Timestamped alert log + baseline reset support</p></div>
+      <p class="proj-desc">Python-based FIM tool that detects unauthorised file modifications, deletions, and new file creation using SHA-256 hashing. Uses watchdog inotify hooks for real-time monitoring with configurable baselines.</p>
+      <div class="tags"><span class="tag tp">Python</span><span class="tag tc">SHA-256</span><span class="tag tg">Watchdog</span><span class="tag tp">Host Security</span></div>
+      <a href="https://github.com/jay-sharma-sec/file-integrity-monitor" target="_blank" rel="noopener noreferrer" class="proj-link">View on GitHub →</a>
+    </article>
+    <article class="proj-card reveal d5">
+      <div class="proj-num">PROJECT_06 <div class="proj-num-badge">📡</div></div>
+      <div class="proj-name">Mini NIDS</div>
+      <div class="proj-metrics"><p><span>✓</span> Port scan, SYN flood, ICMP flood detection<br/><span>✓</span> Payload signature matching — SQLi, RCE, traversal<br/><span>✓</span> Session summary with top offenders + improvement suggestions</p></div>
+      <p class="proj-desc">Lightweight Network Intrusion Detection System built with Scapy. Detects port scans, SYN/ICMP floods, suspicious payloads, and flow anomalies in real time or from pcap files. Configurable rules engine via JSON.</p>
+      <div class="tags"><span class="tag tp">Python</span><span class="tag tc">Scapy</span><span class="tag tg">IDS / IPS</span><span class="tag tp">Network Security</span></div>
+      <a href="https://github.com/jay-sharma-sec/mini-nids" target="_blank" rel="noopener noreferrer" class="proj-link">View on GitHub →</a>
+    </article>
   </div>
 </section>
 
@@ -542,13 +558,7 @@ footer{border-top:1px solid var(--border);padding:22px 80px;display:flex;align-i
   <span class="s-eyebrow reveal">04 // EXPERIENCE</span>
   <h2 class="s-title reveal d1">Where I've <em>Worked</em></h2>
   <div class="timeline">
-    <div class="tl-item reveal d1">
-      <div class="tl-dot current"></div>
-      <div class="tl-date">2026 — ONGOING <span class="badge-current">CURRENT</span></div>
-      <div class="tl-role">Cybersecurity Intern</div>
-      <div class="tl-company">// Active Role · Cybersecurity Domain</div>
-      <ul class="tl-bullets"><li>Applying offensive and defensive security concepts in a real-world cybersecurity internship, building on hands-on tool development and penetration testing experience.</li></ul>
-    </div>
+
     <div class="tl-item reveal d2">
       <div class="tl-dot"></div>
       <div class="tl-date">DEC 2025 — MAR 2026</div>
@@ -669,22 +679,10 @@ footer{border-top:1px solid var(--border);padding:22px 80px;display:flex;align-i
   <h2 class="s-title reveal d1">What I've <em>Documented</em></h2>
   <div class="blog-grid">
     <div class="blog-card reveal d1">
-      <span class="blog-badge">TOOL BUILD</span>
-      <div class="blog-title">Building ReconX — A 3-Phase Pentest Toolkit</div>
-      <p class="blog-excerpt">How I built a modular offensive security toolkit combining port scanning, web enumeration, and password attacks — and what CSRF protection taught me about defence.</p>
-      <a href="https://linkedin.com/in/jay-sharma-cybersecurity-analyst" target="_blank" rel="noopener noreferrer" class="blog-cta">Read on LinkedIn →</a>
-    </div>
-    <div class="blog-card reveal d2">
       <span class="blog-badge">WEB SECURITY</span>
       <div class="blog-title">403 Forbidden Isn't a Dead End</div>
-      <p class="blog-excerpt">Phase 2 of ReconX taught me that a 403 response is a signal — something exists there. Exploring directory brute forcing, security headers, and CMS fingerprinting.</p>
-      <a href="https://linkedin.com/in/jay-sharma-cybersecurity-analyst" target="_blank" rel="noopener noreferrer" class="blog-cta">Read on LinkedIn →</a>
-    </div>
-    <div class="blog-card reveal d3">
-      <span class="blog-badge">OWASP</span>
-      <div class="blog-title">How a Trusted URL Becomes a Phishing Link</div>
-      <p class="blog-excerpt">My web vulnerability scanner found an open redirect on a live site. Here's exactly how an attacker would weaponize it in a phishing campaign using a legitimate domain.</p>
-      <a href="https://linkedin.com/in/jay-sharma-cybersecurity-analyst" target="_blank" rel="noopener noreferrer" class="blog-cta">Read on LinkedIn →</a>
+      <p class="blog-excerpt">Phase 2 of ReconX taught me that a 403 response is a signal — something exists there. Exploring directory brute forcing, security headers, and CMS fingerprinting in real targets.</p>
+      <a href="https://www.linkedin.com/posts/jay-sharma-cybersecurity-analyst_cybersecurity-websecurity-ethicalhacking-share-7458106120235249664-__Pt/" target="_blank" rel="noopener noreferrer" class="blog-cta">Read on LinkedIn →</a>
     </div>
   </div>
 </section>
@@ -953,7 +951,7 @@ window.addEventListener('resize', () => {
     help:()=>[{t:'success',v:'Available commands:'},{t:'out',v:'  whoami    → about me'},{t:'out',v:'  skills    → technical skills'},{t:'out',v:'  projects  → my projects'},{t:'out',v:'  contact   → get in touch'},{t:'out',v:'  clear     → clear terminal'},{t:'out',v:'  nmap      → fun easter egg'}],
     whoami:()=>[{t:'success',v:'Jay Sharma — Cybersecurity Analyst'},{t:'out',v:'Location  : Mumbai, India'},{t:'out',v:"Education : B.Sc. CS, Bhavan's College"},{t:'out',v:'Focus     : Offensive Security & API Testing'}],
     skills:()=>[{t:'success',v:'Loaded: skills.txt'},{t:'out',v:'[Offensive]   Pentest | OWASP | Burp Suite | Metasploit | Nmap'},{t:'out',v:'[Defensive]   Splunk | IR | Phishing | OSINT | Wireshark'},{t:'out',v:'[Testing]     Postman | API Sec | Automation | Regression'},{t:'out',v:'[Languages]   Python | Bash | Git | Docker'}],
-    projects:()=>[{t:'success',v:'4 projects found:'},{t:'out',v:'web-vuln-scanner       → OWASP Top 10 scanner (100% header detection)'},{t:'out',v:'reconx                 → 3-phase pentest toolkit (65k ports/3s)'},{t:'out',v:'antivirus-sim          → SHA-256/MD5 malware engine (1000+ files)'},{t:'out',v:'arp-spoofer-detector   → Real-time ARP/MitM detection with Scapy'}],
+    projects:()=>[{t:'success',v:'6 projects found:'},{t:'out',v:'web-vuln-scanner       → OWASP Top 10 scanner (100% header detection)'},{t:'out',v:'reconx                 → 3-phase pentest toolkit (65k ports/3s)'},{t:'out',v:'antivirus-sim          → SHA-256/MD5 malware engine (1000+ files)'},{t:'out',v:'arp-spoofer-detector   → Real-time ARP/MitM detection with Scapy'},{t:'out',v:'file-integrity-monitor → SHA-256 FIM with real-time inotify hooks'},{t:'out',v:'mini-nids              → Network IDS: port scan, SYN flood, payload detection'}],
     contact:()=>[{t:'success',v:"Let's connect:"},{t:'out',v:'Email   : jaysharma4626@gmail.com'},{t:'out',v:'Phone   : +91 9372770721'},{t:'out',v:'GitHub  : github.com/jay-sharma-sec'},{t:'out',v:'THM     : tryhackme.com/p/Shadow4658'}],
     nmap:()=>[{t:'warn',v:'Starting Nmap scan on portfolio.local...'},{t:'out',v:'PORT    STATE  SERVICE'},{t:'success',v:'80/tcp  open   http  (Jay Sharma Portfolio)'},{t:'success',v:'443/tcp open   https (SSL secured)'},{t:'success',v:'1337/tcp open  hacker-mode (Easter egg found!)'},{t:'warn',v:'Nmap done: 1 IP address scanned in 2.37s'}],
     clear:()=>'CLEAR'
