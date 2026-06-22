@@ -621,7 +621,7 @@ footer{border-top:1px solid var(--border);padding:22px 80px;display:flex;align-i
       <div class="t-line"><span class="t-prompt">jay@kali:~$</span><span class="t-cmd">&nbsp;cat skills.txt</span></div>
       <div class="t-line"><span class="t-success">→ Penetration Testing | API Security | SOC | OSINT | Python | Burp Suite</span></div>
       <div class="t-line"><span class="t-prompt">jay@kali:~$</span><span class="t-cmd">&nbsp;ls projects/</span></div>
-      <div class="t-line"><span class="t-out">web-vuln-scanner/&nbsp;&nbsp;&nbsp;reconx/&nbsp;&nbsp;&nbsp;antivirus-simulation/</span></div>
+      <div class="t-line"><span class="t-out">web-vuln-scanner/&nbsp;&nbsp;reconx/&nbsp;&nbsp;antivirus-sim/&nbsp;&nbsp;arp-spoofer/&nbsp;&nbsp;file-integrity-monitor/&nbsp;&nbsp;mini-nids/</span></div>
       <div class="t-line" style="margin-top:8px"><span class="t-warn">Type a command: whoami | skills | projects | contact | help</span></div>
       <div class="t-input-wrap">
         <span class="t-prompt-live">jay@kali:~$&nbsp;</span>
@@ -680,8 +680,8 @@ footer{border-top:1px solid var(--border);padding:22px 80px;display:flex;align-i
   <div class="blog-grid">
     <div class="blog-card reveal d1">
       <span class="blog-badge">WEB SECURITY</span>
-      <div class="blog-title">403 Forbidden Isn't a Dead End</div>
-      <p class="blog-excerpt">Phase 2 of ReconX taught me that a 403 response is a signal — something exists there. Exploring directory brute forcing, security headers, and CMS fingerprinting in real targets.</p>
+      <div class="blog-title">Phishing + Open Redirect Chain — Write-up #1</div>
+      <p class="blog-excerpt">My web vulnerability scanner flagged an open redirect on a live target. Low severity in isolation — but chained with phishing, the trusted domain becomes the weapon. Here's the full attack chain and fix.</p>
       <a href="https://www.linkedin.com/posts/jay-sharma-cybersecurity-analyst_cybersecurity-websecurity-ethicalhacking-share-7458106120235249664-__Pt/" target="_blank" rel="noopener noreferrer" class="blog-cta">Read on LinkedIn →</a>
     </div>
   </div>
@@ -948,9 +948,11 @@ window.addEventListener('resize', () => {
   const body=document.getElementById('termBody');
   const inp=document.getElementById('t-input');
   const cmds={
-    help:()=>[{t:'success',v:'Available commands:'},{t:'out',v:'  whoami    → about me'},{t:'out',v:'  skills    → technical skills'},{t:'out',v:'  projects  → my projects'},{t:'out',v:'  contact   → get in touch'},{t:'out',v:'  clear     → clear terminal'},{t:'out',v:'  nmap      → fun easter egg'}],
+    help:()=>[{t:'success',v:'Available commands:'},{t:'out',v:'  whoami    → about me'},{t:'out',v:'  skills    → technical skills'},{t:'out',v:'  projects  → my projects'},{t:'out',v:'  ls        → list projects'},{t:'out',v:'  contact   → get in touch'},{t:'out',v:'  clear     → clear terminal'},{t:'out',v:'  nmap      → fun easter egg'}],
     whoami:()=>[{t:'success',v:'Jay Sharma — Cybersecurity Analyst'},{t:'out',v:'Location  : Mumbai, India'},{t:'out',v:"Education : B.Sc. CS, Bhavan's College"},{t:'out',v:'Focus     : Offensive Security & API Testing'}],
     skills:()=>[{t:'success',v:'Loaded: skills.txt'},{t:'out',v:'[Offensive]   Pentest | OWASP | Burp Suite | Metasploit | Nmap'},{t:'out',v:'[Defensive]   Splunk | IR | Phishing | OSINT | Wireshark'},{t:'out',v:'[Testing]     Postman | API Sec | Automation | Regression'},{t:'out',v:'[Languages]   Python | Bash | Git | Docker'}],
+    ls:()=>[{t:'success',v:'6 projects found:'},{t:'out',v:'web-vuln-scanner/      reconx/      antivirus-sim/'},{t:'out',v:'arp-spoofer/           file-integrity-monitor/      mini-nids/'}],
+    'ls projects/':()=>[{t:'success',v:'6 projects found:'},{t:'out',v:'web-vuln-scanner/      reconx/      antivirus-sim/'},{t:'out',v:'arp-spoofer/           file-integrity-monitor/      mini-nids/'}],
     projects:()=>[{t:'success',v:'6 projects found:'},{t:'out',v:'web-vuln-scanner       → OWASP Top 10 scanner (100% header detection)'},{t:'out',v:'reconx                 → 3-phase pentest toolkit (65k ports/3s)'},{t:'out',v:'antivirus-sim          → SHA-256/MD5 malware engine (1000+ files)'},{t:'out',v:'arp-spoofer-detector   → Real-time ARP/MitM detection with Scapy'},{t:'out',v:'file-integrity-monitor → SHA-256 FIM with real-time inotify hooks'},{t:'out',v:'mini-nids              → Network IDS: port scan, SYN flood, payload detection'}],
     contact:()=>[{t:'success',v:"Let's connect:"},{t:'out',v:'Email   : jaysharma4626@gmail.com'},{t:'out',v:'Phone   : +91 9372770721'},{t:'out',v:'GitHub  : github.com/jay-sharma-sec'},{t:'out',v:'THM     : tryhackme.com/p/Shadow4658'}],
     nmap:()=>[{t:'warn',v:'Starting Nmap scan on portfolio.local...'},{t:'out',v:'PORT    STATE  SERVICE'},{t:'success',v:'80/tcp  open   http  (Jay Sharma Portfolio)'},{t:'success',v:'443/tcp open   https (SSL secured)'},{t:'success',v:'1337/tcp open  hacker-mode (Easter egg found!)'},{t:'warn',v:'Nmap done: 1 IP address scanned in 2.37s'}],
